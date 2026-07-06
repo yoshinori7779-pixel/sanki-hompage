@@ -1,0 +1,6 @@
+# 福原義教 個人サイト robots.txt
+User-agent: *
+Allow: /
+
+# ▼ 公開ドメイン確定後、実URLに変更してください（依頼書 3-(1)）
+Sitemap: https://yoshinori7779-pixel.github.io/sanki-hompage/sitemap.xml

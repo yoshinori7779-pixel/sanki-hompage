@@ -3,1126 +3,233 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>三紀運輸株式会社 | 一緒にはたらこう！</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --blue-dark: #0D3280;
-      --blue-main: #1A4FAD;
-      --blue-light: #2D6FD4;
-      --gold: #F0A500;
-      --white: #FFFFFF;
-      --off-white: #F7F9FF;
-      --text-dark: #1a1a2e;
-      --text-gray: #555;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-      color: var(--text-dark);
-      background: var(--white);
-      overflow-x: hidden;
-    }
-
-    /* ========= NAVIGATION ========= */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: rgba(13, 50, 128, 0.97);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 5%;
-      height: 64px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
-    .nav-logo-icon {
-      width: 38px;
-      height: 38px;
-    }
-
-    .nav-logo-text {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.3rem;
-      color: var(--white);
-      line-height: 1.1;
-    }
-
-    .nav-logo-sub {
-      font-size: 0.55rem;
-      letter-spacing: 0.12em;
-      color: #aac4ff;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-weight: 300;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: #ccd9f5;
-      text-decoration: none;
-      font-size: 0.78rem;
-      font-weight: 400;
-      padding: 6px 10px;
-      border-radius: 4px;
-      transition: color 0.2s, background 0.2s;
-      white-space: nowrap;
-    }
-
-    .nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.1); }
-
-    .nav-apply-btn {
-      background: var(--gold);
-      color: #1a1a1a !important;
-      font-weight: 700 !important;
-      border-radius: 24px !important;
-      padding: 8px 20px !important;
-      font-size: 0.82rem !important;
-      transition: transform 0.2s, box-shadow 0.2s !important;
-    }
-
-    .nav-apply-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 16px rgba(240,165,0,0.5);
-      background: var(--gold) !important;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 6px;
-    }
-
-    .hamburger span {
-      width: 24px;
-      height: 2px;
-      background: var(--white);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-
-    /* ========= HERO ========= */
-    #hero {
-      min-height: 100vh;
-      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-main) 50%, var(--blue-light) 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 100px 5% 60px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-bg-pattern {
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 50%, rgba(45,111,212,0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(240,165,0,0.1) 0%, transparent 40%);
-      pointer-events: none;
-    }
-
-    .hero-truck {
-      width: min(420px, 80vw);
-      margin-bottom: 32px;
-      filter: drop-shadow(0 12px 32px rgba(0,0,0,0.3));
-      animation: float 4s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: var(--gold);
-      color: #1a1a1a;
-      font-size: 0.82rem;
-      font-weight: 700;
-      padding: 6px 18px;
-      border-radius: 20px;
-      margin-bottom: 16px;
-      letter-spacing: 0.05em;
-      animation: fadein 0.8s ease;
-    }
-
-    .hero-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(2.2rem, 6vw, 4rem);
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 12px;
-      animation: fadein 1s ease;
-    }
-
-    .hero-title span { color: var(--gold); }
-
-    .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      color: #aac4ff;
-      margin-bottom: 32px;
-      font-weight: 300;
-      animation: fadein 1.2s ease;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 60px;
-      animation: fadein 1.4s ease;
-    }
-
-    .btn-primary {
-      background: var(--gold);
-      color: #1a1a1a;
-      padding: 16px 40px;
-      border-radius: 50px;
-      font-size: 1.05rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 6px 24px rgba(240,165,0,0.4);
-    }
-
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(240,165,0,0.6); }
-
-    .btn-outline {
-      border: 2px solid rgba(255,255,255,0.7);
-      color: var(--white);
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-size: 1rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: var(--white); }
-
-    .hero-locations {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      width: 100%;
-      max-width: 720px;
-      margin-bottom: 48px;
-    }
-
-    .location-card {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 12px;
-      padding: 14px 10px;
-      color: var(--white);
-      text-align: center;
-      transition: background 0.2s, transform 0.2s;
-      backdrop-filter: blur(4px);
-    }
-
-    .location-card:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
-
-    .location-card .icon { font-size: 1.6rem; margin-bottom: 4px; }
-    .location-card .name { font-size: 0.88rem; font-weight: 700; }
-    .location-card .label { font-size: 0.7rem; color: #aac4ff; }
-
-    .hero-stats {
-      display: flex;
-      gap: 48px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .stat-item { text-align: center; color: var(--white); }
-    .stat-num {
-      font-family: 'Oswald', sans-serif;
-      font-size: 2.4rem;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .stat-label { font-size: 0.78rem; color: #aac4ff; margin-top: 4px; }
-
-    /* ========= MARQUEE ========= */
-    .marquee-wrap {
-      background: var(--blue-dark);
-      padding: 14px 0;
-      overflow: hidden;
-      border-top: 3px solid var(--gold);
-      border-bottom: 3px solid var(--gold);
-    }
-
-    .marquee-track {
-      display: flex;
-      animation: marquee 18s linear infinite;
-      white-space: nowrap;
-      width: max-content;
-    }
-
-    .marquee-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--white);
-      font-size: 0.95rem;
-      font-weight: 700;
-      padding: 0 32px;
-      letter-spacing: 0.05em;
-    }
-
-    .marquee-dot { color: var(--gold); font-size: 1.2rem; }
-
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    /* ========= SECTIONS ========= */
-    section { padding: 80px 5%; }
-
-    .section-label {
-      display: inline-block;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      color: var(--blue-main);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .section-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      line-height: 1.2;
-      margin-bottom: 12px;
-    }
-
-    .section-desc {
-      font-size: 0.95rem;
-      color: var(--text-gray);
-      max-width: 560px;
-      line-height: 1.8;
-      margin-bottom: 48px;
-    }
-
-    .section-center { text-align: center; }
-    .section-center .section-desc { margin-left: auto; margin-right: auto; }
-
-    /* ========= REASONS ========= */
-    #reasons { background: var(--off-white); }
-
-    .reasons-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .reason-card {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 28px 24px;
-      box-shadow: 0 4px 20px rgba(26,79,173,0.08);
-      border-top: 4px solid var(--blue-main);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .reason-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(26,79,173,0.16); }
-
-    .reason-icon { font-size: 2.4rem; margin-bottom: 12px; }
-    .reason-num {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.7rem;
-      color: var(--blue-main);
-      letter-spacing: 0.1em;
-      margin-bottom: 6px;
-    }
-    .reason-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
-    .reason-desc { font-size: 0.88rem; color: var(--text-gray); line-height: 1.8; }
-
-    /* ========= JOBS ========= */
-    #jobs { background: var(--white); }
-
-    .jobs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 28px;
-    }
-
-    .job-card {
-      background: var(--off-white);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .job-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(26,79,173,0.15); }
-
-    .job-header {
-      background: linear-gradient(135deg, var(--blue-main), var(--blue-light));
-      padding: 28px 24px;
-      color: var(--white);
-      text-align: center;
-    }
-
-    .job-header .icon { font-size: 3rem; margin-bottom: 10px; }
-    .job-header h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
-    .job-header p { font-size: 0.8rem; color: #aac4ff; }
-
-    .job-body { padding: 24px; }
-
-    .job-salary {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.8rem;
-      color: var(--blue-main);
-      margin-bottom: 4px;
-    }
-
-    .job-salary-label { font-size: 0.75rem; color: var(--text-gray); margin-bottom: 16px; }
-
-    .job-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-
-    .job-tag {
-      background: rgba(26,79,173,0.08);
-      color: var(--blue-main);
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 20px;
-    }
-
-    .job-apply-btn {
-      display: block;
-      text-align: center;
-      background: var(--gold);
-      color: #1a1a1a;
-      padding: 12px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 0.92rem;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
-    }
-
-    .job-apply-btn:hover { transform: scale(1.02); box-shadow: 0 4px 16px rgba(240,165,0,0.4); }
-
-    /* ========= VOICES ========= */
-    #voices { background: var(--blue-dark); }
-    #voices .section-title { color: var(--white); }
-    #voices .section-label { color: var(--gold); }
-    #voices .section-desc { color: #aac4ff; }
-
-    .voices-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .voice-card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 16px;
-      padding: 28px 24px;
-      backdrop-filter: blur(4px);
-      transition: background 0.3s, transform 0.3s;
-    }
-
-    .voice-card:hover { background: rgba(255,255,255,0.13); transform: translateY(-4px); }
-
-    .voice-avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue-main), var(--gold));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      margin-bottom: 16px;
-      flex-shrink: 0;
-    }
-
-    .voice-name { font-weight: 700; color: var(--white); margin-bottom: 2px; }
-    .voice-role { font-size: 0.78rem; color: #aac4ff; margin-bottom: 16px; }
-
-    .voice-quote {
-      font-size: 0.9rem;
-      color: #ccd9f5;
-      line-height: 1.9;
-      position: relative;
-      padding-left: 16px;
-    }
-
-    .voice-quote::before {
-      content: '"';
-      position: absolute;
-      left: 0;
-      top: -4px;
-      font-size: 2rem;
-      color: var(--gold);
-      font-family: Georgia, serif;
-      line-height: 1;
-    }
-
-    /* ========= BENEFITS ========= */
-    #benefits { background: var(--off-white); }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .benefit-card {
-      background: var(--white);
-      border-radius: 14px;
-      padding: 24px 20px;
-      text-align: center;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-      transition: transform 0.3s, box-shadow 0.3s;
-      border-bottom: 3px solid var(--blue-main);
-    }
-
-    .benefit-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(26,79,173,0.12); }
-    .benefit-icon { font-size: 2.2rem; margin-bottom: 10px; }
-    .benefit-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; }
-    .benefit-desc { font-size: 0.82rem; color: var(--text-gray); line-height: 1.7; }
-
-    /* ========= COMPANY ========= */
-    #company { background: var(--white); }
-
-    .company-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: start;
-    }
-
-    .company-intro {
-      font-size: 0.92rem;
-      color: var(--text-gray);
-      line-height: 2;
-      margin-bottom: 24px;
-    }
-
-    .company-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.88rem;
-    }
-
-    .company-table tr { border-bottom: 1px solid #e8edf5; }
-    .company-table tr:last-child { border-bottom: none; }
-
-    .company-table th {
-      text-align: left;
-      padding: 12px 14px;
-      background: var(--off-white);
-      color: var(--blue-dark);
-      font-weight: 700;
-      width: 34%;
-      font-size: 0.82rem;
-    }
-
-    .company-table td {
-      padding: 12px 14px;
-      color: var(--text-dark);
-      line-height: 1.7;
-    }
-
-    .location-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 16px;
-    }
-
-    .location-badge {
-      background: rgba(26,79,173,0.08);
-      color: var(--blue-main);
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid rgba(26,79,173,0.2);
-    }
-
-    /* ========= CTA ========= */
-    #cta {
-      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-main) 100%);
-      text-align: center;
-      padding: 100px 5%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    #cta::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(240,165,0,0.08) 0%, transparent 60%);
-    }
-
-    .cta-label { color: var(--gold); letter-spacing: 0.2em; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
-    .cta-title { font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--white); margin-bottom: 16px; }
-    .cta-desc { color: #aac4ff; font-size: 0.95rem; margin-bottom: 40px; line-height: 1.8; }
-
-    .cta-buttons {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 40px;
-    }
-
-    .btn-tel {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255,255,255,0.12);
-      border: 2px solid rgba(255,255,255,0.4);
-      color: var(--white);
-      padding: 16px 32px;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-
-    .btn-tel:hover { background: rgba(255,255,255,0.22); }
-
-    .cta-hours {
-      font-size: 0.8rem;
-      color: #aac4ff;
-    }
-
-    /* ========= FOOTER ========= */
-    footer {
-      background: #050f24;
-      color: #7a93c8;
-      padding: 40px 5% 24px;
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-bottom: 24px;
-    }
-
-    .footer-logo {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.3rem;
-      color: var(--white);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      list-style: none;
-    }
-
-    .footer-links a {
-      color: #7a93c8;
-      text-decoration: none;
-      font-size: 0.8rem;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--white); }
-
-    .footer-copy {
-      text-align: center;
-      font-size: 0.75rem;
-      border-top: 1px solid #1a2a4a;
-      padding-top: 20px;
-      color: #4a6090;
-    }
-
-    /* ========= FADE IN ANIMATION ========= */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-    @keyframes fadein {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ========= RESPONSIVE ========= */
-    @media (max-width: 768px) {
-      nav { padding: 0 4%; }
-      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--blue-dark); padding: 20px; gap: 4px; }
-      .nav-links.open { display: flex; }
-      .nav-links li { width: 100%; }
-      .nav-links a { display: block; padding: 10px 16px; }
-      .hamburger { display: flex; }
-      .hero-locations { grid-template-columns: repeat(2, 1fr); }
-      .company-inner { grid-template-columns: 1fr; gap: 40px; }
-      section { padding: 60px 5%; }
-    }
-
-    @media (max-width: 480px) {
-      .hero-locations { grid-template-columns: repeat(2, 1fr); }
-      .hero-stats { gap: 28px; }
-      .stat-num { font-size: 2rem; }
-    }
-  </style>
+  <title>福原義教 | 59歳トラック運転手がAIで人生を変える挑戦</title>
+  <meta name="description" content="59歳・現役トラック運転手の福原義教が、AIを武器に人生を変えていく挑戦の記録。YouTube・TikTokでの発信、実際に使っているAIツール、日々の学びをまとめた個人サイトです。">
+  <meta name="theme-color" content="#05070d">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://yoshinori7779-pixel.github.io/sanki-hompage/">
+
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="福原義教 公式サイト">
+  <meta property="og:title" content="福原義教 | 59歳トラック運転手がAIで人生を変える挑戦">
+  <meta property="og:description" content="59歳・現役トラック運転手がAIを武器に人生を変えていく挑戦の記録。">
+  <meta property="og:url" content="https://yoshinori7779-pixel.github.io/sanki-hompage/">
+  <meta property="og:image" content="https://yoshinori7779-pixel.github.io/sanki-hompage/assets/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2305070d'/><text x='16' y='23' font-family='Oswald,sans-serif' font-size='18' font-weight='700' text-anchor='middle' fill='%2333e1ff'>義</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/hero-motion.css">
 </head>
 <body>
+<a class="skip-link" href="#main">本文へスキップ</a>
 
-<!-- ========= NAVIGATION ========= -->
-<nav>
-  <a href="#hero" class="nav-logo">
-    <svg class="nav-logo-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="38" height="38" rx="8" fill="#F0A500"/>
-      <text x="50%" y="26" text-anchor="middle" font-family="Oswald" font-size="18" font-weight="700" fill="#0D3280">三紀</text>
-    </svg>
-    <div>
-      <div class="nav-logo-text">三紀運輸</div>
-      <div class="nav-logo-sub">SANKI TRANSPORT CO.,LTD.</div>
-    </div>
+<header class="site-header">
+  <a class="brand" href="index.html" aria-label="福原義教 ホーム">
+    <span class="brand-mark"><span>義</span></span>
+    <span>
+      <span class="brand-name">FUKUHARA</span>
+      <span class="brand-tag">AI × TRUCK DRIVER</span>
+    </span>
   </a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#reasons">えらばれる理由</a></li>
-    <li><a href="#jobs">おしごと</a></li>
-    <li><a href="#voices">社員の声</a></li>
-    <li><a href="#benefits">おきにいり</a></li>
-    <li><a href="#company">会社のこと</a></li>
-    <li><a href="#cta" class="nav-apply-btn">📩 おうぼする</a></li>
-  </ul>
-  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+  <button class="nav-toggle" aria-label="メニューを開閉" aria-expanded="false" aria-controls="primary-nav">
     <span></span><span></span><span></span>
-  </div>
-</nav>
+  </button>
+  <nav class="nav" id="primary-nav" aria-label="メインナビゲーション">
+    <a href="index.html">ホーム</a>
+    <a href="about.html">自己紹介</a>
+    <a href="youtube.html">YouTube</a>
+    <a href="tiktok.html">TikTok</a>
+    <a href="ai-tools.html">AIツール</a>
+    <a href="blog.html">ブログ</a>
+    <a href="contact.html" class="nav-cta">お問い合わせ</a>
+  </nav>
+</header>
 
-<!-- ========= HERO ========= -->
-<section id="hero">
-  <div class="hero-bg-pattern"></div>
+<main id="main">
 
-  <!-- Truck SVG -->
-  <svg class="hero-truck" viewBox="0 0 520 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Trailer box -->
-    <rect x="0" y="30" width="340" height="110" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
-    <text x="170" y="93" text-anchor="middle" font-family="Oswald" font-size="26" font-weight="700" fill="white">三紀運輸</text>
-    <text x="170" y="118" text-anchor="middle" font-family="Oswald" font-size="12" fill="rgba(255,255,255,0.6)">SANKI TRANSPORT</text>
-    <!-- Cab -->
-    <rect x="340" y="55" width="130" height="85" rx="12" fill="rgba(13,50,128,0.8)" stroke="rgba(45,111,212,0.6)" stroke-width="2"/>
-    <!-- Windows -->
-    <rect x="360" y="65" width="55" height="40" rx="6" fill="rgba(45,111,212,0.5)"/>
-    <rect x="420" y="65" width="38" height="40" rx="6" fill="rgba(45,111,212,0.5)"/>
-    <!-- Windshield shine -->
-    <rect x="363" y="67" width="14" height="8" rx="3" fill="rgba(255,255,255,0.3)"/>
-    <!-- Grille -->
-    <rect x="455" y="85" width="12" height="40" rx="4" fill="rgba(240,165,0,0.8)"/>
-    <!-- Headlight -->
-    <circle cx="468" cy="90" r="8" fill="#F0A500"/>
-    <!-- Wheels -->
-    <circle cx="70" cy="145" r="24" fill="#1a1a2e" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
-    <circle cx="70" cy="145" r="10" fill="#374151"/>
-    <circle cx="240" cy="145" r="24" fill="#1a1a2e" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
-    <circle cx="240" cy="145" r="10" fill="#374151"/>
-    <circle cx="400" cy="145" r="24" fill="#1a1a2e" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
-    <circle cx="400" cy="145" r="10" fill="#374151"/>
-    <circle cx="455" cy="145" r="22" fill="#1a1a2e" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
-    <circle cx="455" cy="145" r="9" fill="#374151"/>
-  </svg>
-
-  <div class="hero-badge">🚛 ドライバー・スタッフ　大募集中！</div>
-  <h1 class="hero-title">いっしょに<span>はたらこう！</span><br>三紀運輸は<span>あなたを待ってます</span></h1>
-  <p class="hero-sub">大阪を中心に関西・全国へ。安全・まじめ・チームワーク。<br>未経験のかたも、しっかりサポートします。</p>
-
-  <div class="hero-buttons">
-    <a href="#cta" class="btn-primary">📩 今すぐ おうぼする</a>
-    <a href="#jobs" class="btn-outline">👀 おしごとを見る</a>
-  </div>
-
-  <div class="hero-locations">
-    <div class="location-card"><div class="icon">🏢</div><div class="name">茨木センター</div><div class="label">本社・物流拠点</div></div>
-    <div class="location-card"><div class="icon">🏭</div><div class="name">大阪センター</div><div class="label">関西メイン拠点</div></div>
-    <div class="location-card"><div class="icon">🚉</div><div class="name">神戸センター</div><div class="label">兵庫エリア担当</div></div>
-    <div class="location-card"><div class="icon">🏔</div><div class="name">京都センター</div><div class="label">古都エリア担当</div></div>
-    <div class="location-card"><div class="icon">🌊</div><div class="name">滋賀センター</div><div class="label">湖南エリア担当</div></div>
-    <div class="location-card"><div class="icon">🌸</div><div class="name">奈良センター</div><div class="label">南近畿エリア担当</div></div>
-  </div>
-
-  <div class="hero-stats">
-    <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">ぜんぶで 6つの 拠点</div></div>
-    <div class="stat-item"><div class="stat-num">○○</div><div class="stat-label">なかまの かず（名）</div></div>
-    <div class="stat-item"><div class="stat-num">○○</div><div class="stat-label">年間おやすみ（日）</div></div>
-  </div>
-</section>
-
-<!-- ========= MARQUEE ========= -->
-<div class="marquee-wrap">
-  <div class="marquee-track" id="marquee">
-    <span class="marquee-item">🏢 茨木センター <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">🏭 大阪センター <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">🚉 神戸センター <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">🏔 京都センター <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">🌊 滋賀センター <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">🌸 奈良センター <span class="marquee-dot">✦</span></span>
-    <!-- duplicate for seamless loop -->
-    <span class="marquee-item">🏢 茨木センター <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">🏭 大阪センター <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">🚉 神戸センター <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">🏔 京都センター <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">🌊 滋賀センター <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">🌸 奈良センター <span class="marquee-dot">✦</span></span>
-  </div>
-</div>
-
-<!-- ========= REASONS ========= -->
-<section id="reasons">
-  <div class="section-center fade-in">
-    <div class="section-label">Why Choose Us</div>
-    <h2 class="section-title">三紀運輸が<span style="color:var(--blue-main)">えらばれる</span> 6つのわけ</h2>
-    <p class="section-desc">はたらく人が「ここでよかった」と思えるように、たくさんのことを大切にしています。</p>
-  </div>
-  <div class="reasons-grid">
-    <div class="reason-card fade-in">
-      <div class="reason-icon">💰</div>
-      <div class="reason-num">REASON 01</div>
-      <div class="reason-title">お給料がしっかりもらえる</div>
-      <div class="reason-desc">月給制で、毎月安定したお金がもらえます。がんばった分だけ昇給のチャンスもあります！</div>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-scan" aria-hidden="true"></div>
+    <div class="hero-ring" aria-hidden="true">
+      <div class="r r1"></div><div class="r r2"></div><div class="r r3"></div>
+      <div class="core"></div><div class="tick"></div>
     </div>
-    <div class="reason-card fade-in">
-      <div class="reason-icon">📅</div>
-      <div class="reason-num">REASON 02</div>
-      <div class="reason-title">おやすみがたくさんある</div>
-      <div class="reason-desc">年間○○日のおやすみ。家族や友だちとの時間もしっかり取れます。ゆとりある生活を応援！</div>
-    </div>
-    <div class="reason-card fade-in">
-      <div class="reason-icon">🚛</div>
-      <div class="reason-num">REASON 03</div>
-      <div class="reason-title">新しいトラックで安心</div>
-      <div class="reason-desc">新しくてきれいなトラックを使っています。いつも整備されているので安心してはたらけます。</div>
-    </div>
-    <div class="reason-card fade-in">
-      <div class="reason-icon">🦺</div>
-      <div class="reason-num">REASON 04</div>
-      <div class="reason-title">安全第一！みんなで守る</div>
-      <div class="reason-desc">安全教育をしっかりおこなっています。みんなが安全で元気にはたらけることが一番大切です。</div>
-    </div>
-    <div class="reason-card fade-in">
-      <div class="reason-icon">📈</div>
-      <div class="reason-num">REASON 05</div>
-      <div class="reason-title">ステップアップできる</div>
-      <div class="reason-desc">免許の取得サポートや研修制度があります。未経験から大型ドライバーになることも夢じゃない！</div>
-    </div>
-    <div class="reason-card fade-in">
-      <div class="reason-icon">😊</div>
-      <div class="reason-num">REASON 06</div>
-      <div class="reason-title">なかよくはたらける職場</div>
-      <div class="reason-desc">先輩がやさしく教えてくれます。新しく入った人もすぐになじめる、あたたかい職場です。</div>
-    </div>
-  </div>
-</section>
-
-<!-- ========= JOBS ========= -->
-<section id="jobs">
-  <div class="section-center fade-in">
-    <div class="section-label">Recruitment</div>
-    <h2 class="section-title">どんな<span style="color:var(--blue-main)">おしごと</span>があるの？</h2>
-    <p class="section-desc">あなたにぴったりのおしごとを見つけてください。未経験でも大丈夫！</p>
-  </div>
-  <div class="jobs-grid">
-    <div class="job-card fade-in">
-      <div class="job-header">
-        <div class="icon">🚛</div>
-        <h3>大型ドライバー</h3>
-        <p>Large Truck Driver</p>
-      </div>
-      <div class="job-body">
-        <div class="job-salary">月給 ○○万円〜</div>
-        <div class="job-salary-label">※経験・スキルにより変動</div>
-        <div class="job-tags">
-          <span class="job-tag">🪪 大型免許</span>
-          <span class="job-tag">📦 長距離OK</span>
-          <span class="job-tag">💰 高収入</span>
-        </div>
-        <p style="font-size:0.85rem;color:var(--text-gray);line-height:1.8;margin-bottom:20px;">
-          大きなトラックで荷物を運ぶおしごとです。経験がある方はもちろん、大型免許取得をめざす方もサポートします！
+    <div class="container">
+      <div class="hero-inner">
+        <p class="hero-status"><span class="dot"></span> STATUS: 挑戦中 / 59 y.o. / ON THE ROAD</p>
+        <h1 class="hero-title">
+          <span class="line">ハンドルを握りながら、</span>
+          <span class="line"><span class="grad" data-type="人生を|未来を|自分を"></span>アップデートする。</span>
+        </h1>
+        <p class="hero-lead">
+          59歳、現役トラック運転手。<b>「歳だから」で終わらせない。</b>
+          AIを相棒に、学び・発信・挑戦を続ける福原義教の記録です。
         </p>
-        <a href="#cta" class="job-apply-btn">📩 このおしごとにおうぼする</a>
+        <div class="hero-actions">
+          <a href="about.html" class="btn btn-primary">わたしの物語を読む <span class="arrow">→</span></a>
+          <a href="youtube.html" class="btn btn-ghost">発信を見る</a>
+        </div>
+        <div class="hero-metrics">
+          <div class="hero-metric"><div class="v"><span>59</span></div><div class="k">歳・現役ドライバー</div></div>
+          <div class="hero-metric"><div class="v">AI<span>×</span>毎日</div><div class="k">学びを継続中</div></div>
+          <div class="hero-metric"><div class="v">2<span>ch</span></div><div class="k">YouTube / TikTok</div></div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="job-card fade-in">
-      <div class="job-header" style="background: linear-gradient(135deg, #1565C0, #2D6FD4);">
-        <div class="icon">🚐</div>
-        <h3>中型・小型ドライバー</h3>
-        <p>Medium / Light Truck Driver</p>
-      </div>
-      <div class="job-body">
-        <div class="job-salary">月給 ○○万円〜</div>
-        <div class="job-salary-label">※経験・スキルにより変動</div>
-        <div class="job-tags">
-          <span class="job-tag">🪪 普通免許OK</span>
-          <span class="job-tag">🏙 地域配送</span>
-          <span class="job-tag">🌱 未経験歓迎</span>
-        </div>
-        <p style="font-size:0.85rem;color:var(--text-gray);line-height:1.8;margin-bottom:20px;">
-          地域を走る身近な配送のおしごとです。普通免許があればはじめられます。未経験の方も大歓迎！
+  <!-- ============ MISSION ============ -->
+  <section id="mission">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Mission</span>
+        <h2 class="title">年齢は、挑戦をやめる理由にならない。</h2>
+        <p class="lead">
+          長距離の運転席は、わたしの学びの教室でもあります。
+          スキマ時間にAIを触り、できることを一つずつ増やす。
+          その過程をまるごと発信し、「同じように迷っている誰か」の背中を押したい。
         </p>
-        <a href="#cta" class="job-apply-btn">📩 このおしごとにおうぼする</a>
+      </div>
+      <div class="grid cols-3">
+        <article class="panel reveal">
+          <p class="card-index">01 / LEARN</p>
+          <h3 class="card-title">AIを、味方にする</h3>
+          <p class="card-text">難しそうに見えるAIも、触ってみれば頼れる相棒。実際に使って分かったことだけを、正直に伝えます。</p>
+        </article>
+        <article class="panel reveal d1">
+          <p class="card-index">02 / SHARE</p>
+          <h3 class="card-title">等身大で、発信する</h3>
+          <p class="card-text">かっこよさより、リアルを。失敗も遠回りも含めて、59歳のいまの挑戦をそのまま届けます。</p>
+        </article>
+        <article class="panel reveal d2">
+          <p class="card-index">03 / CHANGE</p>
+          <h3 class="card-title">一歩ずつ、変えていく</h3>
+          <p class="card-text">大きく変わろうとしなくていい。今日の小さな一歩の積み重ねが、人生を少しずつ動かします。</p>
+        </article>
       </div>
     </div>
+  </section>
 
-    <div class="job-card fade-in">
-      <div class="job-header" style="background: linear-gradient(135deg, #0D3280, #1A4FAD);">
-        <div class="icon">📦</div>
-        <h3>センタースタッフ</h3>
-        <p>Logistics Center Staff</p>
+  <!-- ============ CHANNELS ============ -->
+  <section id="channels" style="border-top:1px solid var(--line-soft);">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Channels</span>
+        <h2 class="title">挑戦を、発信中。</h2>
+        <p class="lead">動画で日々の学びと現場をお届けしています。フォローで一緒に走りましょう。</p>
       </div>
-      <div class="job-body">
-        <div class="job-salary">月給 ○○万円〜</div>
-        <div class="job-salary-label">※経験・スキルにより変動</div>
-        <div class="job-tags">
-          <span class="job-tag">🏢 屋内作業</span>
-          <span class="job-tag">🌱 未経験歓迎</span>
-          <span class="job-tag">👫 チームワーク</span>
+      <div class="grid cols-2">
+        <article class="panel reveal" style="padding:30px;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+            <span class="channel-avatar" style="width:56px;height:56px;font-size:1.4rem;margin:0;">▶</span>
+            <div>
+              <h3 class="card-title" style="margin:0;">YouTube</h3>
+              <span class="channel-handle">/ 準備中・近日公開</span>
+            </div>
+          </div>
+          <p class="card-text" style="margin-bottom:18px;">じっくり伝えたいAI活用や挑戦の記録は、YouTubeで。ドライバー目線の学びを配信していきます。</p>
+          <a href="youtube.html" class="btn btn-ghost" style="font-size:0.88rem;padding:11px 22px;">チャンネルを見る <span class="arrow">→</span></a>
+        </article>
+        <article class="panel reveal d1" style="padding:30px;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+            <span class="channel-avatar" style="width:56px;height:56px;font-size:1.4rem;margin:0;">♪</span>
+            <div>
+              <h3 class="card-title" style="margin:0;">TikTok</h3>
+              <span class="channel-handle">@youyoshi7</span>
+            </div>
+          </div>
+          <p class="card-text" style="margin-bottom:18px;">短くてリアルな日常と挑戦のひとコマは、TikTokで。スキマ時間にサクッと覗いてください。</p>
+          <a href="tiktok.html" class="btn btn-ghost" style="font-size:0.88rem;padding:11px 22px;">アカウントを見る <span class="arrow">→</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LATEST POSTS ============ -->
+  <section id="latest" style="border-top:1px solid var(--line-soft);">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Latest</span>
+        <h2 class="title">最新の記事</h2>
+        <p class="lead">AIツールの使い方や挑戦の記録をブログに綴っています。</p>
+      </div>
+      <div class="grid cols-2">
+        <article class="panel post reveal">
+          <div class="thumb">🤖</div>
+          <div>
+            <p class="meta">AI TOOLS · 2026.07</p>
+            <h3 class="post-title"><a href="ai-tools.html">運転手のわたしがChatGPTを毎日使う理由</a></h3>
+            <p class="excerpt">スマホひとつで始められたAIとの付き合い方を、正直にまとめました。</p>
+          </div>
+        </article>
+        <article class="panel post reveal d1">
+          <div class="thumb">🚚</div>
+          <div>
+            <p class="meta">BLOG · 2026.07</p>
+            <h3 class="post-title"><a href="blog.html">59歳、YouTubeを始めた日のこと</a></h3>
+            <p class="excerpt">「今さら」を「今から」に変えた、最初の一歩の話。</p>
+          </div>
+        </article>
+      </div>
+      <div style="margin-top:26px;">
+        <a href="blog.html" class="btn btn-ghost" style="font-size:0.88rem;padding:11px 22px;">記事一覧へ <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section id="cta">
+    <div class="container">
+      <div class="cta-band reveal">
+        <span class="eyebrow" style="justify-content:center;">Get in touch</span>
+        <h2 class="title" style="margin-top:14px;">一緒に、挑戦しませんか。</h2>
+        <p class="lead">お仕事のご相談、コラボ、応援メッセージ、なんでも歓迎です。お気軽にご連絡ください。</p>
+        <div class="cta-actions">
+          <a href="contact.html" class="btn btn-primary">お問い合わせ <span class="arrow">→</span></a>
+          <a href="about.html" class="btn btn-ghost">プロフィールを見る</a>
         </div>
-        <p style="font-size:0.85rem;color:var(--text-gray);line-height:1.8;margin-bottom:20px;">
-          倉庫・センターでの荷物の整理や管理をするおしごとです。チームでいっしょにはたらく楽しさがあります！
-        </p>
-        <a href="#cta" class="job-apply-btn">📩 このおしごとにおうぼする</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ========= VOICES ========= -->
-<section id="voices">
-  <div class="section-center fade-in">
-    <div class="section-label">Employee Voices</div>
-    <h2 class="section-title" style="color:white;">なかまの<span style="color:var(--gold)">声</span>をきこう</h2>
-    <p class="section-desc">実際に三紀運輸ではたらいている人のリアルな声をご紹介します。</p>
-  </div>
-  <div class="voices-grid">
-    <div class="voice-card fade-in">
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px;">
-        <div class="voice-avatar">👨</div>
-        <div>
-          <div class="voice-name">Aさん（30代）</div>
-          <div class="voice-role">大型ドライバー ／ 入社4年目</div>
-        </div>
-      </div>
-      <div class="voice-quote">最初は不安でしたが、先輩がやさしく教えてくれてすぐになれました。給料も安定しているし、家族との時間もしっかり取れています。毎日楽しく仕事できています！</div>
-    </div>
-    <div class="voice-card fade-in">
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px;">
-        <div class="voice-avatar">👩</div>
-        <div>
-          <div class="voice-name">Bさん（20代）</div>
-          <div class="voice-role">センタースタッフ ／ 入社2年目</div>
-        </div>
-      </div>
-      <div class="voice-quote">未経験からはじめましたが、研修がしっかりしていて安心でした。チームのみんなが仲良くて、毎日笑顔で働けています。将来はリーダーをめざしています！</div>
-    </div>
-    <div class="voice-card fade-in">
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px;">
-        <div class="voice-avatar">👨‍🦱</div>
-        <div>
-          <div class="voice-name">Cさん（40代）</div>
-          <div class="voice-role">中型ドライバー ／ 入社7年目</div>
-        </div>
-      </div>
-      <div class="voice-quote">長く働き続けられる会社です。福利厚生がしっかりしているし、休みもとりやすい。子育て中でも無理なく続けられるので、本当に助かっています。</div>
-    </div>
-  </div>
-</section>
+</main>
 
-<!-- ========= BENEFITS ========= -->
-<section id="benefits">
-  <div class="section-center fade-in">
-    <div class="section-label">Benefits</div>
-    <h2 class="section-title">うれしい<span style="color:var(--blue-main)">待遇・福利厚生</span></h2>
-    <p class="section-desc">三紀運輸ではたらく人が安心してくらせるように、いろんなサポートがあります。</p>
-  </div>
-  <div class="benefits-grid">
-    <div class="benefit-card fade-in">
-      <div class="benefit-icon">💴</div>
-      <div class="benefit-title">安定したお給料</div>
-      <div class="benefit-desc">月給制。毎月きちんとした金額がもらえます。</div>
-    </div>
-    <div class="benefit-card fade-in">
-      <div class="benefit-icon">🏖</div>
-      <div class="benefit-title">おやすみがたくさん</div>
-      <div class="benefit-desc">年間○○日のおやすみ。有給休暇もとりやすいです。</div>
-    </div>
-    <div class="benefit-card fade-in">
-      <div class="benefit-icon">🏥</div>
-      <div class="benefit-title">社会保険がある</div>
-      <div class="benefit-desc">健康保険・厚生年金・雇用保険・労災保険に加入。</div>
-    </div>
-    <div class="benefit-card fade-in">
-      <div class="benefit-icon">🪪</div>
-      <div class="benefit-title">免許・資格をサポート</div>
-      <div class="benefit-desc">大型免許の取得費用を会社がサポートしてくれます。</div>
-    </div>
-    <div class="benefit-card fade-in">
-      <div class="benefit-icon">🚌</div>
-      <div class="benefit-title">交通費がでる</div>
-      <div class="benefit-desc">通勤にかかる交通費は全額支給します。</div>
-    </div>
-    <div class="benefit-card fade-in">
-      <div class="benefit-icon">💎</div>
-      <div class="benefit-title">各種手当がある</div>
-      <div class="benefit-desc">家族手当・住宅手当など、生活を助ける手当が充実。</div>
-    </div>
-    <div class="benefit-card fade-in">
-      <div class="benefit-icon">📊</div>
-      <div class="benefit-title">昇給がある</div>
-      <div class="benefit-desc">がんばった分だけ給料がアップ。年1回の昇給制度。</div>
-    </div>
-    <div class="benefit-card fade-in">
-      <div class="benefit-icon">🎉</div>
-      <div class="benefit-title">その他いろいろ</div>
-      <div class="benefit-desc">制服支給・健康診断・社内研修など、サポート充実。</div>
-    </div>
-  </div>
-</section>
-
-<!-- ========= COMPANY ========= -->
-<section id="company">
-  <div class="fade-in">
-    <div class="section-label">Company</div>
-    <h2 class="section-title">三紀運輸の<span style="color:var(--blue-main)">会社のこと</span></h2>
-  </div>
-  <div class="company-inner">
-    <div class="fade-in">
-      <p class="company-intro">
-        三紀運輸株式会社は、大阪府茨木市を本社とする物流会社です。関西を中心に6つの拠点を持ち、地域のくらしと産業を毎日支えています。安全・誠実・チームワークを大切に、ドライバーからスタッフまで全員が主役の会社をめざしています。一人ひとりが「ここではたらいてよかった」と感じられる職場環境をつくり続けています。
-      </p>
-      <div class="location-badges">
-        <span class="location-badge">🏢 茨木センター</span>
-        <span class="location-badge">🏭 大阪センター</span>
-        <span class="location-badge">🚉 神戸センター</span>
-        <span class="location-badge">🏔 京都センター</span>
-        <span class="location-badge">🌊 滋賀センター</span>
-        <span class="location-badge">🌸 奈良センター</span>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html">
+          <span class="brand-mark"><span>義</span></span>
+          <span><span class="brand-name">FUKUHARA</span><span class="brand-tag">AI × TRUCK DRIVER</span></span>
+        </a>
+        <p class="footer-about">59歳、トラックの運転席から。AIを相棒に人生を変える挑戦を、等身大で発信しています。</p>
+      </div>
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <a href="about.html">自己紹介</a>
+        <a href="ai-tools.html">AIツール紹介</a>
+        <a href="blog.html">ブログ</a>
+        <a href="contact.html">お問い合わせ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <a href="youtube.html">YouTube</a>
+        <a href="tiktok.html">TikTok（@youyoshi7）</a>
       </div>
     </div>
-    <div class="fade-in">
-      <table class="company-table">
-        <tr><th>会社の名前</th><td>三紀運輸株式会社</td></tr>
-        <tr><th>できた年</th><td>○○年○月（※後日記入）</td></tr>
-        <tr><th>代表のひと</th><td>代表取締役 ○○ ○○（※後日記入）</td></tr>
-        <tr><th>本社のばしょ</th><td>大阪府茨木市豊川４丁目２７番１５号</td></tr>
-        <tr><th>でんわばんごう</th><td><a href="tel:0726225532" style="color:var(--blue-main);font-weight:700;">072-622-XXXX</a></td></tr>
-        <tr><th>なかまのかず</th><td>○○名（※後日記入）</td></tr>
-        <tr><th>おしごとのないよう</th><td>一般貨物自動車運送業・物流センター運営</td></tr>
-        <tr><th>きょてんのかず</th><td>6拠点（関西エリア）</td></tr>
-      </table>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> 福原義教 — All rights reserved.</span>
+      <span>DRIVEN BY CURIOSITY · POWERED BY AI</span>
     </div>
   </div>
-</section>
-
-<!-- ========= CTA ========= -->
-<section id="cta">
-  <div class="fade-in">
-    <div class="cta-label">✦ JOIN OUR TEAM ✦</div>
-    <h2 class="cta-title">さあ、いっしょに<br><span style="color:var(--gold)">はたらこう！</span></h2>
-    <p class="cta-desc">
-      未経験でも大丈夫。まずは気軽に問い合わせてください。<br>
-      採用担当がやさしく答えます。
-    </p>
-    <div class="cta-buttons">
-      <a href="mailto:recruit@sanki-transport.co.jp" class="btn-primary" style="font-size:1.05rem;">
-        📩 メールでおうぼする
-      </a>
-      <a href="tel:072622XXXX" class="btn-tel">
-        📞 でんわでとい合わせる
-      </a>
-    </div>
-    <div class="cta-hours">受付時間：平日 9:00〜18:00 ／ 土曜 9:00〜15:00</div>
-  </div>
-</section>
-
-<!-- ========= FOOTER ========= -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-logo">三紀運輸株式会社</div>
-    <ul class="footer-links">
-      <li><a href="#reasons">えらばれる理由</a></li>
-      <li><a href="#jobs">おしごと</a></li>
-      <li><a href="#voices">社員の声</a></li>
-      <li><a href="#benefits">待遇</a></li>
-      <li><a href="#company">会社のこと</a></li>
-      <li><a href="#cta">おうぼする</a></li>
-    </ul>
-  </div>
-  <div class="footer-copy">© 2025 三紀運輸株式会社 All Rights Reserved.</div>
 </footer>
 
-<script>
-  // ハンバーガーメニュー
-  function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
-  }
-
-  // ナビのリンクを押したらメニューを閉じる
-  document.querySelectorAll('.nav-links a').forEach(function(a) {
-    a.addEventListener('click', function() {
-      document.getElementById('navLinks').classList.remove('open');
-    });
-  });
-
-  // スクロールしたらふわっと表示
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.fade-in').forEach(function(el) {
-    observer.observe(el);
-  });
-
-  // ナビのスクロールで色を変える
-  window.addEventListener('scroll', function() {
-    var nav = document.querySelector('nav');
-    if (window.scrollY > 50) {
-      nav.style.background = 'rgba(5,15,36,0.98)';
-    } else {
-      nav.style.background = 'rgba(13,50,128,0.97)';
-    }
-  });
-</script>
+<script src="assets/main.js" defer></script>
 </body>
 </html>
